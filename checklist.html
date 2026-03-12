@@ -149,7 +149,7 @@
             border-radius: 10px;
             background-color: #f9fafb;
             transition: all 0.2s;
-            cursor: default;
+            cursor: pointer;
         }
 
         .checklist-item:hover {
@@ -168,6 +168,26 @@
             justify-content: center;
             background-color: white;
             flex-shrink: 0;
+        }
+
+        .checkbox .checkbox-icon {
+            display: none;
+            color: #22c55e;
+            font-size: 12px;
+        }
+
+        .checklist-item.checked .checkbox {
+            border-color: #22c55e;
+            background-color: #dcfce7;
+        }
+
+        .checklist-item.checked .checkbox .checkbox-icon {
+            display: block;
+        }
+
+        .checklist-item.checked .item-text {
+            text-decoration: line-through;
+            color: #9ca3af;
         }
 
         .checklist-item:hover .checkbox {
@@ -337,47 +357,47 @@
 <!-- Category: Basic -->
 <div class="category-header">기본 품목</div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">신분증 &amp; 지갑</span>
 <span class="item-subtext">현금/카드</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">개인 세면도구</span>
 <span class="item-subtext">칫솔/치약/폼클렌징</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">여벌 옷 &amp; 속옷</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">충전기 &amp; 보조배터리</span>
 </div>
 <!-- Category: BBQ -->
 <div class="category-header">바베큐 &amp; 식사</div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">고기 &amp; 쌈채소</span>
 <span class="item-subtext">삼겹살/목살</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">바베큐 소스 &amp; 양념</span>
 <span class="item-subtext">쌈장/소금/후추</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">주류 &amp; 음료 &amp; 물</span>
 <span class="item-subtext">넉넉하게</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">일회용품 세트</span>
 <span class="item-subtext">접시/컵/젓가락</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">햇반 &amp; 라면</span>
 <span class="item-subtext">아침/야식용</span>
 </div>
@@ -399,43 +419,43 @@
 <!-- Category: Entertainment -->
 <div class="category-header">놀거리 &amp; 분위기</div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">블루투스 스피커</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">보드게임 &amp; 카드</span>
 <span class="item-subtext">할리갈리 등</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">카메라 &amp; 삼각대</span>
 <span class="item-subtext">인생샷 필수</span>
 </div>
 <!-- Category: Convenience -->
 <div class="category-header">편의 &amp; 안전</div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">슬리퍼</span>
 <span class="item-subtext">실내/실외용</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">비상약</span>
 <span class="item-subtext">소화제/진통제/밴드</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">모기 기피제</span>
 <span class="item-subtext">여름철 필수</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">멀티탭</span>
 <span class="item-subtext">충전 전쟁 대비</span>
 </div>
 <div class="checklist-item">
-<div class="checkbox"></div>
+<div class="checkbox"><i class="fa-solid fa-check checkbox-icon"></i></div>
 <span class="item-text">비닐봉투</span>
 <span class="item-subtext">젖은 옷/쓰레기용</span>
 </div>
@@ -443,7 +463,15 @@
 </div>
 </div>
 <script>
-(function(){var b=document.getElementById('hamburgerBtn');var i=document.getElementById('hamburgerIcon');var n=document.querySelector('.site-nav');if(b&&n){b.addEventListener('click',function(){n.classList.toggle('menu-open');if(i){i.classList.toggle('fa-bars');i.classList.toggle('fa-times');}});}})();
+(function(){
+    var b=document.getElementById('hamburgerBtn');
+    var i=document.getElementById('hamburgerIcon');
+    var n=document.querySelector('.site-nav');
+    if(b&&n){ b.addEventListener('click',function(){ n.classList.toggle('menu-open'); if(i){ i.classList.toggle('fa-bars'); i.classList.toggle('fa-times'); } }); }
+    document.querySelectorAll('.checklist-item').forEach(function(item){
+        item.addEventListener('click', function(){ this.classList.toggle('checked'); });
+    });
+})();
 </script>
 </body>
 </html>
