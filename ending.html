@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>마무리</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Do+Hyeon&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            padding-top: 42px;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 762px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #166534; /* Green-800 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .bg-accent {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: #15803d; /* Green-700 */
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .bg-accent-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 600px;
+            height: 600px;
+            background-color: #14532d; /* Green-900 */
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* Main Container */
+        .content-wrapper {
+            z-index: 10;
+            width: 1000px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Hero Text */
+        .hero-title {
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 50px;
+        }
+
+        /* Action Checklist Card */
+        .checklist-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px 50px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            color: #1f2937; /* Gray-800 */
+            text-align: left;
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f0fdf4;
+            padding-bottom: 15px;
+        }
+
+        .card-title {
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 2rem;
+            color: #166534; /* Green-800 */
+            margin: 0;
+        }
+
+        /* Grid Layout for Checklist Items */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .check-icon {
+            background-color: #dcfce7; /* Green-100 */
+            color: #16a34a; /* Green-600 */
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .item-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 5px 0;
+        }
+
+        .item-content p {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Safety Tips Section */
+        .safety-box {
+            margin-top: 30px;
+            background-color: #fffbeb; /* Amber-50 */
+            border: 1px solid #fcd34d; /* Amber-300 */
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .safety-icon {
+            font-size: 1.5rem;
+            color: #d97706; /* Amber-600 */
+            margin-right: 15px;
+        }
+
+        .safety-text {
+            color: #92400e; /* Amber-800 */
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Decorative Elements */
+        .deco-icon {
+            position: absolute;
+            font-size: 4rem;
+            color: #22c55e;
+            opacity: 0.2;
+            top: -20px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: white;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .site-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 42px;
+            z-index: 9999;
+            background-color: #14532d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 6px 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+        .site-nav a {
+            color: rgba(255,255,255,0.95);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .site-nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        .site-nav a.current {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        @media (max-width: 1024px) {
+            body { min-height: 100vh; }
+            .content-wrapper { width: 100%; max-width: 900px; padding: 0 24px; }
+        }
+        @media (max-width: 768px) {
+            .content-wrapper { padding: 0 16px; }
+            .hero-title { font-size: 2.5rem !important; }
+            .hero-subtitle { font-size: 1.25rem !important; margin-bottom: 24px; }
+            .checklist-card { padding: 24px; }
+            .checklist-grid { grid-template-columns: 1fr; gap: 16px; }
+            .card-title { font-size: 1.5rem !important; }
+            .site-nav a { font-size: 0.7rem; padding: 4px 6px; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper { padding: 0 12px; }
+            .hero-title { font-size: 1.75rem !important; }
+            .hero-subtitle { font-size: 1rem !important; }
+            .checklist-card { padding: 16px; }
+            .card-title { font-size: 1.25rem !important; }
+            .item-content h3 { font-size: 1rem !important; }
+            .site-nav a { font-size: 0.65rem; padding: 3px 4px; }
+        }
+    </style>
+</head>
+<body>
+<nav class="site-nav">
+<a href="index.html">메인</a>
+<a href="overview.html">여행 개요</a>
+<a href="pensions.html">추천 펜션</a>
+<a href="schedule-day1.html">일정 Day1</a>
+<a href="schedule-day2.html">일정 Day2</a>
+<a href="checklist.html">준비물</a>
+<a href="budget.html">예산</a>
+<a href="attractions.html">관광지</a>
+<a href="comparison.html">펜션 비교</a>
+<a href="ending.html" class="current">마무리</a>
+</nav>
+<!-- Background Elements -->
+<div class="bg-pattern"></div>
+<div class="bg-accent"></div>
+<div class="bg-accent-2"></div>
+<!-- Floating Icons -->
+<i class="fa-solid fa-plane floating-icon" style="top: 15%; left: 10%; font-size: 3rem; animation-delay: 0s;"></i>
+<i class="fa-solid fa-camera floating-icon" style="top: 20%; right: 15%; font-size: 2.5rem; animation-delay: 1s;"></i>
+<i class="fa-solid fa-music floating-icon" style="bottom: 15%; left: 15%; font-size: 2.5rem; animation-delay: 2s;"></i>
+<!-- Main Content -->
+<div class="content-wrapper">
+<div class="text-center mb-8">
+<h1 class="hero-title">즐거운 여행 되세요!</h1>
+<p class="hero-subtitle">친구들과 함께하는 특별한 추억 만들기 💚</p>
+</div>
+<div class="checklist-card">
+<i class="fa-solid fa-clipboard-list deco-icon"></i>
+<div class="card-header">
+<i class="fa-solid fa-flag-checkered text-3xl text-green-600 mr-4"></i>
+<h2 class="card-title">출발 전 최종 체크리스트</h2>
+</div>
+<div class="checklist-grid">
+<!-- Item 1 -->
+<div class="action-item">
+<div class="check-icon">
+<i class="fa-solid fa-check"></i>
+</div>
+<div class="item-content">
+<h3>예약 확정</h3>
+<p>펜션 입금 확인 및 안내 문자 수신 (주소/비번)</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="action-item">
+<div class="check-icon">
+<i class="fa-solid fa-check"></i>
+</div>
+<div class="item-content">
+<h3>사전 예약</h3>
+<p>레일바이크, 남이섬(주말) 등 인기 티켓 선예매</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="action-item">
+<div class="check-icon">
+<i class="fa-solid fa-check"></i>
+</div>
+<div class="item-content">
+<h3>역할 분담</h3>
+<p>운전, 장보기, 요리, 사진 촬영 등 담당 정하기</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="action-item">
+<div class="check-icon">
+<i class="fa-solid fa-check"></i>
+</div>
+<div class="item-content">
+<h3>최종 점검</h3>
+<p>차량 점검(주유/타이어), 날씨 확인 및 우산 챙기기</p>
+</div>
+</div>
+</div>
+<!-- Safety Tip -->
+<div class="safety-box">
+<i class="fa-solid fa-triangle-exclamation safety-icon"></i>
+<p class="safety-text">안전 수칙: 바베큐 화기 취급 주의, 운전 전 음주 절대 금지, 늦은 밤 소음 매너 지키기</p>
+</div>
+</div>
+</div>
+</body>
+</html>

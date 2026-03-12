@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>1박 2일 일정표 - Day 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Do+Hyeon&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            padding-top: 42px;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 720px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0fdf4;
+            flex-shrink: 0;
+        }
+
+        .header-bg {
+            background-color: #166534; /* Green-800 */
+            color: white;
+            padding: 30px 60px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.1;
+            font-size: 10rem;
+            transform: translate(20%, -10%);
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1 1 auto;
+            padding: 20px 60px 40px;
+            gap: 30px;
+            min-height: 0;
+            overflow: visible;
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+            position: relative;
+        }
+
+        /* Timeline Line */
+        .timeline-line {
+            position: absolute;
+            left: 100px;
+            top: 20px;
+            bottom: 20px;
+            width: 4px;
+            background-color: #dcfce7; /* Green-100 */
+            z-index: 0;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            flex: 0 0 auto;
+        }
+
+        .time-box {
+            width: 80px;
+            text-align: right;
+            padding-right: 20px;
+            font-weight: 700;
+            color: #166534; /* Green-800 */
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background-color: #22c55e; /* Green-500 */
+            border: 4px solid #f0fdf4; /* Matches body bg */
+            border-radius: 50%;
+            margin-left: -12px; /* Center on line */
+            margin-right: 30px;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 2px #dcfce7;
+        }
+        
+        /* Specific dot colors based on activity type */
+        .dot-travel { background-color: #3b82f6; } /* Blue */
+        .dot-food { background-color: #f59e0b; } /* Amber */
+        .dot-activity { background-color: #ec4899; } /* Pink */
+        .dot-relax { background-color: #8b5cf6; } /* Violet */
+
+        .content-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            border-left: 5px solid #22c55e; /* Default Green */
+            transition: transform 0.2s;
+        }
+
+        .content-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+        }
+
+        /* Card border colors */
+        .border-travel { border-left-color: #3b82f6; }
+        .border-food { border-left-color: #f59e0b; }
+        .border-activity { border-left-color: #ec4899; }
+        .border-relax { border-left-color: #8b5cf6; }
+
+        .icon-wrapper {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background-color: #f0fdf4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: #166534;
+            flex-shrink: 0;
+        }
+
+        /* Icon bg colors */
+        .bg-travel { background-color: #eff6ff; color: #2563eb; }
+        .bg-food { background-color: #fffbeb; color: #d97706; }
+        .bg-activity { background-color: #fdf2f8; color: #db2777; }
+        .bg-relax { background-color: #f5f3ff; color: #7c3aed; }
+
+        .card-text h3 {
+            margin: 0 0 4px 0;
+            font-size: 1.1rem;
+            color: #1f2937;
+        }
+
+        .card-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .section-title {
+            font-family: 'Do Hyeon', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .day-badge {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .site-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 42px;
+            z-index: 9999;
+            background-color: #14532d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 6px 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+        .site-nav a {
+            color: rgba(255,255,255,0.95);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .site-nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        .site-nav a.current {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        @media (max-width: 1024px) {
+            body { min-height: 100vh; }
+            .main-container { padding: 16px 24px; }
+            .header-bg { padding: 24px; }
+        }
+        @media (max-width: 768px) {
+            .main-container { padding: 12px 16px 24px; }
+            .header-bg { padding: 20px 16px; }
+            .site-nav a { font-size: 0.7rem; padding: 4px 6px; }
+            .text-4xl { font-size: 1.5rem !important; }
+            .timeline-line { left: 60px; }
+            .time-box { width: 50px; font-size: 1rem; padding-right: 10px; }
+            .timeline-dot { margin-right: 16px; }
+            .content-card { padding: 12px 14px; }
+            .card-text h3 { font-size: 1rem !important; }
+            .card-text p { font-size: 0.8rem !important; }
+            .icon-wrapper { width: 36px; height: 36px; font-size: 1rem; margin-right: 10px; }
+        }
+        @media (max-width: 480px) {
+            .main-container { padding: 10px 12px 20px; }
+            .header-bg { padding: 16px 12px; }
+            .site-nav a { font-size: 0.65rem; padding: 3px 4px; }
+            .text-4xl { font-size: 1.25rem !important; }
+            .timeline-line { left: 44px; }
+            .time-box { width: 36px; font-size: 0.85rem; }
+            .timeline-dot { width: 14px; height: 14px; margin-right: 12px; }
+            .content-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .icon-wrapper { margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+<nav class="site-nav">
+<a href="index.html">메인</a>
+<a href="overview.html">여행 개요</a>
+<a href="pensions.html">추천 펜션</a>
+<a href="schedule-day1.html">일정 Day1</a>
+<a href="schedule-day2.html" class="current">일정 Day2</a>
+<a href="checklist.html">준비물</a>
+<a href="budget.html">예산</a>
+<a href="attractions.html">관광지</a>
+<a href="comparison.html">펜션 비교</a>
+<a href="ending.html">마무리</a>
+</nav>
+<div class="flex flex-col min-h-[720px] w-full">
+<!-- Header -->
+<header class="header-bg flex flex-col justify-center">
+<i class="fa-solid fa-calendar-check header-pattern"></i>
+<div class="z-10 flex items-center">
+<h1 class="text-4xl section-title">1박 2일 일정표</h1>
+<div class="day-badge">
+<i class="fa-solid fa-sun mr-2"></i> Day 2
+                </div>
+</div>
+<p class="text-lg opacity-90 font-light mt-2 flex items-center">
+<i class="fa-solid fa-route mr-2 text-green-300"></i>
+                여유로운 관광과 안전한 귀가, 여행의 마무리
+            </p>
+</header>
+<!-- Main Content -->
+<div class="main-container">
+<div class="timeline-container">
+<div class="timeline-line"></div>
+<!-- 08:30 Wake up -->
+<div class="timeline-item">
+<div class="time-box">08:30</div>
+<div class="timeline-dot dot-relax"></div>
+<div class="content-card border-relax">
+<div class="icon-wrapper bg-relax">
+<i class="fa-solid fa-mug-hot"></i>
+</div>
+<div class="card-text">
+<h3>기상 &amp; 아침 식사</h3>
+<p>상쾌한 아침 공기 마시며 간단한 조식 (라면/햇반/커피)</p>
+</div>
+</div>
+</div>
+<!-- 09:30 Walk -->
+<div class="timeline-item">
+<div class="time-box">09:30</div>
+<div class="timeline-dot dot-activity"></div>
+<div class="content-card border-activity">
+<div class="icon-wrapper bg-activity">
+<i class="fa-solid fa-tree"></i>
+</div>
+<div class="card-text">
+<h3>펜션 주변 산책</h3>
+<p>퇴실 전 펜션 주변 자연 경관 감상 및 포토 타임</p>
+</div>
+</div>
+</div>
+<!-- 11:00 Check-out -->
+<div class="timeline-item">
+<div class="time-box">11:00</div>
+<div class="timeline-dot"></div>
+<div class="content-card">
+<div class="icon-wrapper">
+<i class="fa-solid fa-door-open"></i>
+</div>
+<div class="card-text">
+<h3>체크아웃</h3>
+<p>짐 정리, 쓰레기 분리수거 후 퇴실 점검</p>
+</div>
+</div>
+</div>
+<!-- 11:30 Sightseeing -->
+<div class="timeline-item">
+<div class="time-box">11:30</div>
+<div class="timeline-dot dot-activity"></div>
+<div class="content-card border-activity">
+<div class="icon-wrapper bg-activity">
+<i class="fa-solid fa-map-location-dot"></i>
+</div>
+<div class="card-text">
+<h3>주요 관광지 방문</h3>
+<p>남이섬 / 아침고요수목원 / 자라섬 중 선택 방문</p>
+</div>
+</div>
+</div>
+<!-- 13:30 Lunch -->
+<div class="timeline-item">
+<div class="time-box">13:30</div>
+<div class="timeline-dot dot-food"></div>
+<div class="content-card border-food">
+<div class="icon-wrapper bg-food">
+<i class="fa-solid fa-utensils"></i>
+</div>
+<div class="card-text">
+<h3>점심 식사 &amp; 카페</h3>
+<p>가평 잣두부 정식 또는 분위기 좋은 리버뷰 카페</p>
+</div>
+</div>
+</div>
+<!-- 15:00 Return -->
+<div class="timeline-item">
+<div class="time-box">15:00</div>
+<div class="timeline-dot dot-travel"></div>
+<div class="content-card border-travel">
+<div class="icon-wrapper bg-travel">
+<i class="fa-solid fa-car-side"></i>
+</div>
+<div class="card-text">
+<h3>서울로 복귀</h3>
+<p>안전 운전하며 서울로 출발 (주말 정체 고려)</p>
+</div>
+</div>
+</div>
+<!-- 16:30 Arrival -->
+<div class="timeline-item">
+<div class="time-box">16:30</div>
+<div class="timeline-dot dot-travel"></div>
+<div class="content-card border-travel">
+<div class="icon-wrapper bg-travel">
+<i class="fa-solid fa-house-user"></i>
+</div>
+<div class="card-text">
+<h3>도착 &amp; 여행 종료</h3>
+<p>각자 집으로 해산, 비용 정산 및 사진 공유</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

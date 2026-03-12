@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>여행 개요</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Do+Hyeon&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            padding-top: 42px;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 762px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0fdf4;
+            flex-shrink: 0;
+        }
+
+        .header-bg {
+            background-color: #166534; /* Green-800 */
+            color: white;
+            padding: 40px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.1;
+            font-size: 15rem;
+            transform: translate(20%, -20%);
+        }
+
+        .content-container {
+            display: flex;
+            min-height: calc(720px - 160px);
+            padding: 40px 60px;
+            gap: 40px;
+        }
+
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-panel {
+            flex: 1.2;
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid #dcfce7; /* Green-100 */
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-left: 6px solid #22c55e; /* Green-500 */
+            transition: transform 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 18px;
+            font-size: 1.15rem;
+            color: #374151; /* Gray-700 */
+            line-height: 1.6;
+        }
+
+        .bullet-list li::before {
+            content: "\f00c"; /* FontAwesome check icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: #16a34a; /* Green-600 */
+            font-size: 1rem;
+        }
+
+        .highlight-text {
+            color: #15803d; /* Green-700 */
+            font-weight: 700;
+        }
+
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            background-color: #dcfce7; /* Green-100 */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #166534; /* Green-800 */
+            font-size: 1.5rem;
+            margin-right: 16px;
+        }
+        
+        .section-title {
+            font-family: 'Do Hyeon', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        
+        .site-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 42px;
+            z-index: 9999;
+            background-color: #14532d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 6px 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+        .site-nav a {
+            color: rgba(255,255,255,0.95);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .site-nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        .site-nav a.current {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        @media (max-width: 1024px) {
+            body { min-height: 100vh; }
+            .header-bg { padding: 32px 24px; }
+            .content-container { padding: 24px; gap: 24px; min-height: 400px; }
+            .right-panel, .left-panel { min-width: 0; }
+        }
+        @media (max-width: 768px) {
+            .content-container { flex-direction: column; padding: 20px 16px; }
+            .header-bg { padding: 24px 16px; }
+            .site-nav a { font-size: 0.7rem; padding: 4px 6px; }
+            .text-5xl { font-size: 1.75rem !important; }
+            .text-xl { font-size: 1rem !important; }
+            .right-panel { padding: 24px; }
+            .bullet-list li { font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .header-bg { padding: 16px 12px; }
+            .content-container { padding: 16px 12px; gap: 16px; }
+            .site-nav a { font-size: 0.65rem; padding: 3px 4px; }
+            .text-5xl { font-size: 1.5rem !important; }
+            .info-card { padding: 16px; }
+            .right-panel { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+<nav class="site-nav">
+<a href="index.html">메인</a>
+<a href="overview.html" class="current">여행 개요</a>
+<a href="pensions.html">추천 펜션</a>
+<a href="schedule-day1.html">일정 Day1</a>
+<a href="schedule-day2.html">일정 Day2</a>
+<a href="checklist.html">준비물</a>
+<a href="budget.html">예산</a>
+<a href="attractions.html">관광지</a>
+<a href="comparison.html">펜션 비교</a>
+<a href="ending.html">마무리</a>
+</nav>
+<!-- Header Section -->
+<header class="header-bg h-40 flex flex-col justify-center">
+<i class="fa-solid fa-map-location-dot header-pattern"></i>
+<div class="z-10">
+<h1 class="text-5xl mb-2 section-title">여행 개요</h1>
+<p class="text-xl opacity-90 font-light flex items-center">
+<i class="fa-solid fa-circle-info mr-2 text-green-300"></i>
+                기본 정보와 여행 컨셉 정리
+            </p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-container">
+<!-- Left Panel: Key Information Cards -->
+<div class="left-panel">
+<div class="info-card flex items-center">
+<div class="icon-circle">
+<i class="fa-solid fa-users"></i>
+</div>
+<div>
+<h3 class="text-green-800 font-bold text-lg mb-1">인원 및 이동</h3>
+<p class="text-gray-600">4명 (남3, 여1) <span class="mx-2 text-gray-300">|</span> 자차 이동 (약 1시간 30분)</p>
+</div>
+</div>
+<div class="info-card flex items-center">
+<div class="icon-circle">
+<i class="fa-regular fa-clock"></i>
+</div>
+<div>
+<h3 class="text-green-800 font-bold text-lg mb-1">체크인 / 체크아웃</h3>
+<p class="text-gray-600">14:00 이후 <span class="mx-2 text-gray-300">|</span> 11:00 이전 (펜션별 상이)</p>
+</div>
+</div>
+<div class="info-card flex items-center">
+<div class="icon-circle">
+<i class="fa-solid fa-wallet"></i>
+</div>
+<div>
+<h3 class="text-green-800 font-bold text-lg mb-1">예산 가이드</h3>
+<p class="text-gray-600">1인당 <span class="highlight-text">8~10만원</span> (숙박·식비·교통·관광 포함)</p>
+</div>
+</div>
+</div>
+<!-- Right Panel: Detailed Plan & Tips -->
+<div class="right-panel relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute -bottom-10 -right-10 text-green-50 text-9xl opacity-50 z-0">
+<i class="fa-solid fa-leaf"></i>
+</div>
+<div class="z-10">
+<h2 class="text-2xl font-bold text-green-800 mb-6 border-b-2 border-green-100 pb-3 flex items-center">
+<i class="fa-solid fa-list-check mr-3 text-green-600"></i>
+                    여행 핵심 포인트
+                </h2>
+<ul class="bullet-list">
+<li>
+<span class="font-bold text-gray-800">핵심 활동:</span> 
+                        자연 속 <span class="highlight-text">바베큐 파티</span>와 힐링, 주변 관광지(남이섬/수목원) 탐방
+                    </li>
+<li>
+<span class="font-bold text-gray-800">숙소 선정 기준:</span> 
+                        4인 수용 가능, 개별 바베큐 시설 완비, 청결한 관리 상태
+                    </li>
+<li>
+<span class="font-bold text-gray-800">예약 필수 체크:</span> 
+                        바베큐 숯/그릴 이용료 별도 확인, 우천 시 바베큐 가능 여부, 주차 공간 확보
+                    </li>
+<li>
+<span class="font-bold text-gray-800">준비물 팁:</span> 
+                        개인 세면도구 및 수건 여분 챙기기, 장보기는 가평 시내 마트 활용 권장
+                    </li>
+</ul>
+<div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start">
+<i class="fa-solid fa-lightbulb text-yellow-500 text-xl mt-1 mr-3"></i>
+<div>
+<h4 class="font-bold text-yellow-800 mb-1">여행 꿀팁</h4>
+<p class="text-sm text-yellow-800 opacity-90">주말 여행 시 교통 체증을 피해 아침 일찍 출발하는 것을 추천합니다. 가평 진입로 정체가 심할 수 있습니다.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

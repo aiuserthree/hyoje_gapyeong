@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>추천 펜션 TOP 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Do+Hyeon&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            padding-top: 42px;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 762px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0fdf4;
+            flex-shrink: 0;
+        }
+
+        .header-bg {
+            background-color: #166534; /* Green-800 */
+            color: white;
+            padding: 40px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.1;
+            font-size: 15rem;
+            transform: translate(20%, -20%);
+        }
+
+        .content-container {
+            display: flex;
+            min-height: calc(720px - 160px);
+            padding: 40px 60px;
+            gap: 40px;
+        }
+
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align to top */
+            gap: 20px;
+        }
+
+        .right-panel {
+            flex: 1.2;
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border: 1px solid #dcfce7; /* Green-100 */
+        }
+
+        .pension-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-left: 6px solid #22c55e; /* Green-500 */
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pension-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            color: #374151; /* Gray-700 */
+            line-height: 1.5;
+        }
+
+        .bullet-list li::before {
+            content: "\f00c"; /* FontAwesome check icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: #16a34a; /* Green-600 */
+            font-size: 1rem;
+        }
+
+        .highlight-text {
+            color: #15803d; /* Green-700 */
+            font-weight: 700;
+        }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-weight: bold;
+            color: white;
+            margin-right: 12px;
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        .rank-1 { background-color: #fbbf24; } /* Amber-400 */
+        .rank-2 { background-color: #94a3b8; } /* Slate-400 */
+        .rank-3 { background-color: #b45309; } /* Amber-700 */
+
+        .section-title {
+            font-family: 'Do Hyeon', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-right: 6px;
+            margin-top: 8px;
+        }
+        .site-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 42px;
+            z-index: 9999;
+            background-color: #14532d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 6px 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+        .site-nav a {
+            color: rgba(255,255,255,0.95);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .site-nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        .site-nav a.current {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        @media (max-width: 1024px) {
+            body { min-height: 100vh; }
+            .header-bg { padding: 32px 24px; }
+            .content-container { padding: 24px; gap: 24px; }
+        }
+        @media (max-width: 768px) {
+            .content-container { flex-direction: column; padding: 20px 16px; }
+            .header-bg { padding: 24px 16px; }
+            .site-nav a { font-size: 0.7rem; padding: 4px 6px; }
+            .text-5xl { font-size: 1.75rem !important; }
+            .right-panel, .left-panel { min-width: 0; }
+            .pension-card h3 { font-size: 1.1rem !important; }
+            .right-panel h2 { font-size: 1.5rem !important; }
+        }
+        @media (max-width: 480px) {
+            .header-bg { padding: 16px 12px; }
+            .content-container { padding: 16px 12px; }
+            .site-nav a { font-size: 0.65rem; padding: 3px 4px; }
+            .text-5xl { font-size: 1.5rem !important; }
+            .pension-card { padding: 16px; }
+            .right-panel { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+<nav class="site-nav">
+<a href="index.html">메인</a>
+<a href="overview.html">여행 개요</a>
+<a href="pensions.html" class="current">추천 펜션</a>
+<a href="schedule-day1.html">일정 Day1</a>
+<a href="schedule-day2.html">일정 Day2</a>
+<a href="checklist.html">준비물</a>
+<a href="budget.html">예산</a>
+<a href="attractions.html">관광지</a>
+<a href="comparison.html">펜션 비교</a>
+<a href="ending.html">마무리</a>
+</nav>
+<!-- Header Section -->
+<header class="header-bg h-40 flex flex-col justify-center">
+<i class="fa-solid fa-hotel header-pattern"></i>
+<div class="z-10">
+<h1 class="text-5xl mb-2 section-title">추천 펜션 TOP 3</h1>
+<p class="text-xl opacity-90 font-light flex items-center">
+<i class="fa-solid fa-thumbs-up mr-2 text-green-300"></i>
+                4명 기준 가성비·시설·접근성 종합 선정
+            </p>
+</div>
+</header>
+<!-- Main Content -->
+<div class="content-container">
+<!-- Left Panel: Top 2 & 3 Pensions -->
+<div class="left-panel">
+<div class="pension-card">
+<div class="flex items-center mb-2">
+<span class="rank-badge rank-2">2</span>
+<h3 class="text-green-800 font-bold text-xl">여우가 달을 사랑할 때 펜션</h3>
+</div>
+<p class="text-gray-500 text-sm mb-3"><i class="fa-solid fa-location-dot mr-1"></i> 가평 | 15~20만원</p>
+<ul class="text-gray-600 text-sm space-y-1 mb-2 pl-4 list-disc">
+<li>야외수영장 및 낭만적인 포토존 보유</li>
+<li>개별 테라스 바베큐로 프라이빗한 저녁</li>
+</ul>
+<div class="mt-auto">
+<span class="feature-tag">#수영장</span>
+<span class="feature-tag">#커플/우정</span>
+<span class="feature-tag">#아침고요수목원</span>
+</div>
+</div>
+<div class="pension-card">
+<div class="flex items-center mb-2">
+<span class="rank-badge rank-3">3</span>
+<h3 class="text-green-800 font-bold text-xl">가평베이스캠프펜션</h3>
+</div>
+<p class="text-gray-500 text-sm mb-3"><i class="fa-solid fa-location-dot mr-1"></i> 가평 북면 | 14~20만원</p>
+<ul class="text-gray-600 text-sm space-y-1 mb-2 pl-4 list-disc">
+<li>넓은 잔디 정원과 쾌적한 단체 공간</li>
+<li>캠핑 감성의 넓은 마당 바베큐 가능</li>
+</ul>
+<div class="mt-auto">
+<span class="feature-tag">#넓은정원</span>
+<span class="feature-tag">#단체펜션</span>
+<span class="feature-tag">#자라섬인근</span>
+</div>
+</div>
+</div>
+<!-- Right Panel: Top 1 Pension Detail -->
+<div class="right-panel relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute -bottom-10 -right-10 text-yellow-100 text-9xl opacity-50 z-0">
+<i class="fa-solid fa-crown"></i>
+</div>
+<div class="z-10 flex flex-col justify-start">
+<div class="flex items-center mb-6">
+<span class="rank-badge rank-1" style="width: 48px; height: 48px; font-size: 1.5rem;">1</span>
+<div>
+<h2 class="text-3xl font-bold text-green-900 section-title">율림동산 셀프바베큐장&amp;펜션</h2>
+<p class="text-green-600 font-medium">가평 청평 | <span class="text-lg font-bold">12~18만원</span> (가성비 최고 👍)</p>
+</div>
+</div>
+<div class="mb-6">
+<img alt="율림동산 펜션 전경" class="w-full h-48 object-cover rounded-xl shadow-md" src="https://page.gensparksite.com/slides_images/61b48a37343da467c6928c27dc1d30c3.webp"/>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-4 border-b-2 border-green-100 pb-2">
+<i class="fa-solid fa-star text-yellow-400 mr-2"></i>강력 추천 이유
+                </h3>
+<ul class="bullet-list">
+<li>
+<span class="font-bold text-gray-800">최적의 바베큐 시설:</span> 
+                        넓은 야외 바베큐장과 단체석이 완비되어 4명이서 여유롭게 파티 가능
+                    </li>
+<li>
+<span class="font-bold text-gray-800">합리적인 가격:</span> 
+                        4인 기준 10만원 중반대로 예산 절약 가능 (가성비 1위)
+                    </li>
+<li>
+<span class="font-bold text-gray-800">주변 놀거리 풍부:</span> 
+                        청평호반 드라이브 코스와 청평 레일바이크 등 액티비티 접근성 우수
+                    </li>
+</ul>
+<div class="mt-6 flex gap-2">
+<span class="feature-tag bg-yellow-100 text-yellow-800">#가성비갑</span>
+<span class="feature-tag bg-green-100 text-green-800">#단체바베큐</span>
+<span class="feature-tag bg-blue-100 text-blue-800">#청평호뷰</span>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
