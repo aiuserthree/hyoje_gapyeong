@@ -270,11 +270,32 @@
             background-color: #14532d;
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 4px;
+            justify-content: space-between;
             padding: 6px 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+        .site-logo {
+            flex-shrink: 0;
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.12);
+            letter-spacing: 0.06em;
+            transition: background 0.2s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo:hover {
+            background: rgba(255,255,255,0.22);
+        }
+        .site-logo i {
+            font-size: 1rem;
+            opacity: 0.95;
         }
         .site-nav a {
             color: rgba(255,255,255,0.95);
@@ -291,6 +312,9 @@
         .site-nav a.current {
             background-color: rgba(255,255,255,0.25);
         }
+        .site-nav .nav-links { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; flex: 1; }
+        .hamburger-btn { display: none; align-items: center; justify-content: center; width: 42px; height: 42px; background: none; border: none; color: white; font-size: 1.4rem; cursor: pointer; padding: 0; -webkit-tap-highlight-color: transparent; }
+        .hamburger-btn:hover { background-color: rgba(255,255,255,0.15); }
 
         @media (max-width: 1024px) {
             body { min-height: 100vh; }
@@ -300,7 +324,13 @@
         @media (max-width: 768px) {
             .main-container { flex-direction: column; padding: 20px 16px; }
             .header-bg { padding: 24px 16px; }
-            .site-nav a { font-size: 0.7rem; padding: 4px 6px; }
+            .site-nav { justify-content: space-between; flex-wrap: nowrap; }
+            .site-logo { font-size: 1.1rem; padding: 5px 10px; }
+            .site-logo i { font-size: 0.85rem; }
+            .site-nav .nav-links { display: none; position: absolute; top: 42px; left: 0; right: 0; background-color: #14532d; flex-direction: column; padding: 12px; gap: 4px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.1); }
+            .site-nav.menu-open .nav-links { display: flex; }
+            .site-nav.menu-open .nav-links a { display: block; padding: 12px 16px; font-size: 0.95rem; border-radius: 8px; }
+            .hamburger-btn { display: flex; }
             .text-4xl { font-size: 1.75rem !important; }
             .budget-grid { grid-template-columns: 1fr; }
             .left-panel, .right-panel { min-width: 0; }
@@ -320,6 +350,8 @@
 </head>
 <body>
 <nav class="site-nav">
+<a href="index.html" class="site-logo"><i class="fa-solid fa-drum"></i>효제분식</a>
+<div class="nav-links">
 <a href="index.html">메인</a>
 <a href="overview.html">여행 개요</a>
 <a href="pensions.html">추천 펜션</a>
@@ -330,6 +362,8 @@
 <a href="attractions.html">관광지</a>
 <a href="comparison.html">펜션 비교</a>
 <a href="ending.html">마무리</a>
+</div>
+<button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="메뉴 열기"><i class="fa-solid fa-bars" id="hamburgerIcon"></i></button>
 </nav>
 <!-- Header -->
 <header class="header-bg">
@@ -490,5 +524,8 @@
 
         new Chart(ctx, config);
     </script>
+<script>
+(function(){var b=document.getElementById('hamburgerBtn');var i=document.getElementById('hamburgerIcon');var n=document.querySelector('.site-nav');if(b&&n){b.addEventListener('click',function(){n.classList.toggle('menu-open');if(i){i.classList.toggle('fa-bars');i.classList.toggle('fa-times');}});}})();
+</script>
 </body>
 </html>

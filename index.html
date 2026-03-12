@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>가평 펜션 1박 여행 플랜</title>
+<title>효제분식 1박 2일 엠티</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Do+Hyeon&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
@@ -22,7 +22,8 @@
             width: 100%;
             max-width: 1280px;
             min-height: 720px;
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             font-family: 'Noto Sans KR', sans-serif;
             background-color: #f0fdf4;
             flex-shrink: 0;
@@ -96,11 +97,40 @@
             background-color: #14532d;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            padding: 6px 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+        .site-logo {
+            flex-shrink: 0;
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.12);
+            letter-spacing: 0.06em;
+            transition: background 0.2s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo:hover {
+            background: rgba(255,255,255,0.22);
+        }
+        .site-logo i {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+        .site-nav .nav-links {
+            display: flex;
+            align-items: center;
             justify-content: center;
             flex-wrap: wrap;
             gap: 4px;
-            padding: 6px 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+            flex: 1;
         }
         .site-nav a {
             color: rgba(255,255,255,0.95);
@@ -117,14 +147,55 @@
         .site-nav a.current {
             background-color: rgba(255,255,255,0.25);
         }
+        .hamburger-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hamburger-btn:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
 
         @media (max-width: 1024px) {
             body { min-height: 100vh; }
             .site-nav a { font-size: 0.75rem; padding: 5px 8px; }
         }
         @media (max-width: 768px) {
-            .site-nav { padding: 6px 8px; gap: 2px; }
-            .site-nav a { font-size: 0.7rem; padding: 4px 6px; }
+            .site-logo { font-size: 1.1rem; padding: 5px 10px; }
+            .site-logo i { font-size: 0.85rem; }
+            .site-nav { padding: 6px 8px; justify-content: flex-end; flex-wrap: nowrap; }
+            .site-nav .nav-links {
+                display: none;
+                position: absolute;
+                top: 42px;
+                left: 0;
+                right: 0;
+                background-color: #14532d;
+                flex-direction: column;
+                padding: 12px;
+                gap: 4px;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .site-nav.menu-open .nav-links {
+                display: flex;
+            }
+            .site-nav.menu-open .nav-links a {
+                display: block;
+                padding: 12px 16px;
+                font-size: 0.95rem;
+                border-radius: 8px;
+            }
+            .hamburger-btn { display: flex; }
             .text-7xl { font-size: 2.5rem !important; }
             .text-3xl { font-size: 1.25rem !important; }
             .text-2xl { font-size: 1.1rem !important; }
@@ -137,7 +208,7 @@
             .text-4xl { font-size: 1.5rem !important; }
         }
         @media (max-width: 480px) {
-            .site-nav a { font-size: 0.65rem; padding: 3px 4px; }
+            .site-nav.menu-open .nav-links a { font-size: 0.9rem; padding: 10px 14px; }
             .text-7xl { font-size: 1.75rem !important; }
             .text-3xl { font-size: 1.1rem !important; }
             .text-2xl { font-size: 1rem !important; }
@@ -149,6 +220,8 @@
 </head>
 <body>
 <nav class="site-nav">
+<a href="index.html" class="site-logo"><i class="fa-solid fa-drum"></i>효제분식</a>
+<div class="nav-links">
 <a href="index.html" class="current">메인</a>
 <a href="overview.html">여행 개요</a>
 <a href="pensions.html">추천 펜션</a>
@@ -159,8 +232,12 @@
 <a href="attractions.html">관광지</a>
 <a href="comparison.html">펜션 비교</a>
 <a href="ending.html">마무리</a>
+</div>
+<button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="메뉴 열기">
+<i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+</button>
 </nav>
-<div class="relative w-full h-full flex flex-col items-center justify-center text-white overflow-hidden">
+<div class="relative w-full min-h-[720px] flex flex-col items-center justify-center text-white overflow-hidden py-12">
 <!-- Background Elements -->
 <div class="bg-pattern"></div>
 <img alt="Camping Background" class="bg-image" src="https://page.gensparksite.com/slides_images/7052d3ca613397268ab38601e0737e7e.webp"/>
@@ -187,11 +264,11 @@
 <div class="mb-10">
 <h2 class="text-3xl font-medium mb-2 tracking-widest uppercase opacity-90">Travel Plan</h2>
 <h1 class="text-7xl font-bold title-text mb-4 leading-tight">
-                    가평 펜션 1박 여행 플랜
+                    효제분식 1박 2일 엠티
                 </h1>
 <div class="w-32 h-1.5 bg-yellow-400 mx-auto rounded-full mb-6"></div>
 <p class="text-2xl font-light opacity-90">
-                    친구 4명과 떠나는 힐링 여행 🌲
+                    봄맞이 힐링 여행 🌲
                 </p>
 </div>
 <!-- Info Cards Grid -->
@@ -220,5 +297,21 @@
 </div>
 </div>
 </div>
+<script>
+(function() {
+    var btn = document.getElementById('hamburgerBtn');
+    var icon = document.getElementById('hamburgerIcon');
+    var nav = document.querySelector('.site-nav');
+    if (btn && nav) {
+        btn.addEventListener('click', function() {
+            nav.classList.toggle('menu-open');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+        });
+    }
+})();
+</script>
 </body>
 </html>
